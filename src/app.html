@@ -1,0 +1,76 @@
+<template>
+    <div>
+        <!-- PAGE HEADER -->
+        <div class="slds-page-header slds-page-header_record-home">
+            <div class="slds-page-header__row">
+                <div class="slds-page-header__col-title">
+                <div class="slds-media">
+                    <div class="slds-media__figure">
+                    <span class="slds-icon_container slds-icon-standard-case">
+                        <svg class="slds-icon slds-page-header__icon" aria-hidden="true">
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/resource/lightningdesign/icons/standard-sprite/svg/symbols.svg#case" />
+                        </svg>
+                    </span>
+                    </div>
+                    <div class="slds-media__body">
+                    <div class="slds-page-header__name">
+                        <div class="slds-page-header__name-title">
+                        <h1>
+                            <span>HACKATHON</span>
+                            <span if.bind="RecordTypeName == 'General_Requests'" class="slds-page-header__title slds-truncate" title="New Chat">Tiny Slack</span>
+                        </h1>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+        <!-- / PAGE HEADER -->
+        
+        <div class="slds-section slds-is-open full forcePageBlockSection forcePageBlockSectionEdit">
+
+            <!-- NEW CASE FORM -->
+            <fieldset class="slds-box slds-theme--default slds-container--large" if.bind="isLoaded && !blnIsSaving">
+                <legend class="slds-text-heading--small slds-p-vertical--medium">Tiny Slack</legend>
+                <h3 class="slds-section__title slds-theme--shade">
+                    <span class="section-header-title slds-p-horizontal--small slds-truncate">Chat Here</span>
+                </h3>
+                <div class="slds-section__content section__content">
+                    <div class="slds-form slds-form_horizontal">
+                        <div class="slds-grid slds-gutters_small">
+                            <div class="slds-col slds-has-flexi-truncate slds-grid">
+                                <div class="slds-col">
+                                    <ce-input label="Message" item.bind="strMessage" required.bind="true"></ce-input>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+                <footer class="slds-card__footer slds-align_absolute-center">
+                        <!-- <button type="button" class="slds-button slds-button_neutral" click.delegate="Cancel()">Cancel</button> -->
+                        <button type="button" class="slds-button slds-button_brand" click.delegate="Save()">Send Message</button>
+                </footer>       
+            </fieldset>
+
+
+        </div>
+
+        <!-- / NEW CASE FORM -->
+
+        <!-- ERROR MODAL -->
+        <ce-modal bln-is-error-modal="true" show.bind="currentErrorMessage != null && currentErrorMessage != ''" icon='error' instructions.bind='currentErrorMessage' button-text='Close' callback.bind='closeError'></ce-modal>
+        <!-- <ce-modal bln-is-error-modal="true" show.bind="data.criticalErrors.size > 0" icon='error' instructions.bind='data.criticalErrors[0].faultcode' button-text='Close' callback.bind='closeError'></ce-modal> -->
+        <!-- / ERROR MODAL -->
+
+        <!-- BLOCK UI -->
+        <div class="slds-spinner_container" show.bind="isLoading">
+            <div role="status" class="slds-spinner slds-spinner_large slds-spinner_brand">
+            <span class="slds-assistive-text">Loading</span>
+            <div class="slds-spinner__dot-a"></div>
+            <div class="slds-spinner__dot-b"></div>
+            </div>
+        </div>
+        <!-- / BLOCK UI --> 
+    </div>
+</template>

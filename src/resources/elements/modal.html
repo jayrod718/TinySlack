@@ -1,0 +1,36 @@
+<template>
+    <div>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container" style="max-width:60em; width:100%;">
+            <header class="slds-modal__header" if.bind="blnIsErrorModal">
+                <div class="demo-only" style="height: 4rem;">
+                    <div class="slds-notify_container slds-is-relative">
+                        <div class="slds-notify slds-notify_toast slds-theme_error" role="alert">
+                            <span class="slds-assistive-text">error</span>
+                            <span class="slds-icon_container slds-icon-utility-error slds-m-right_small slds-no-flex slds-align-top" title="Description of icon when needed">
+                                <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/resource/lightningdesign/icons/utility-sprite/svg/symbols.svg#${icon}" />
+                                </svg>
+                            </span>
+                            <div class="slds-notify__content">
+                                <h2 class="slds-text-heading_small ">There was an error with this app, the details on the error are below.</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <header class="slds-modal__header" if.bind="!blnIsErrorModal">
+                <h2 id="modal-heading-01" class="slds-text-heading_small slds-hyphenate" innerhtml.bind="headerText"></h2>
+            </header>
+            <div if.bind="instructions" class="slds-modal__content slds-p-around_medium" style="height: 20rem;" id="modal-content-id-1">
+                <p innerhtml.bind="instructions"></p>
+            </div>
+            <footer class="slds-modal__footer">
+                <button if.bind="buttonText" class="slds-button slds-button_brand" click.delegate="_callback()">${buttonText}</button>
+                <button if.bind="altButtonText" class="slds-button slds-button_neutral" click.delegate="_altCallback()">${altButtonText}</button>
+            </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </div>
+</template>

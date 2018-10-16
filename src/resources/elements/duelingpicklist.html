@@ -1,0 +1,100 @@
+<template>
+	<!-- label with warning-->
+	<!-- <label class="label" if.bind="label">${label}
+		<span class="sub-label" if.bind="instructions">${instructions}</span>
+	</label>
+	<p class="help is-danger" if.bind="required && !isValid">${errorMsg}</p>
+	<p class="help is-warning" if.bind="isWarning">${warningMsg}</p> -->
+	<!-- if value attrbute doesn't exist-->
+	<!-- <div class="control" ref="_formGroup" if.bind="_areObjects && !valueAttribute" repeat.for="i of items">
+		<label class="checkbox">
+			<input class="${required && !isValid ? 'has-text-danger' : ''} ${isOverrideInvalid ? 'has-text-danger': ''}" type="checkbox" disabled.bind="disabled" checked.bind="selectedItems" model.bind="i" change.delegate="_changed($event, $index)"/> ${i[displayAttribute]}
+		</label>
+	</div> -->
+	<!--if value attribute exists-->
+	<!-- <div class="control" ref="_formGroup" if.bind="_areObjects && valueAttribute" repeat.for="i of items">
+		<label class="checkbox">
+			<input class="${required && !isValid ? 'has-text-danger' : ''} ${isOverrideInvalid ? 'has-text-danger': ''}" type="checkbox" disabled.bind="disabled" checked.bind="selectedItems" value.bind="i[valueAttribute]" change.delegate="_changed($event, $index)"/> ${i[displayAttribute]}
+		</label>
+	</div> -->
+	<!--if it's a list of strings-->
+	<!-- <div class="control" ref="_formGroup" if.bind="!_areObjects" repeat.for="i of items">
+		<label class="checkbox">
+			<input class="${required && !isValid ? 'has-text-danger' : ''} ${isOverrideInvalid ? 'has-text-danger': ''}" type="checkbox" disabled.bind="disabled" checked.bind="selectedItems" model.bind="i" change.delegate="_changed($event, $index)"/> ${i}
+		</label>
+	</div> -->
+
+	<div class="slds-form-element">
+		<span id="picklist-group-label" class="slds-form-element__label slds-form-element__legend">${label}</span>
+		<div class="slds-form-element__control">
+			<div class="slds-dueling-list">
+				<div class="slds-assistive-text" id="drag-live-region"></div>
+				<div class="slds-assistive-text" id="option-drag-label">Press space bar when on an item, to move it within the list. CMD plus left and right arrow keys, to move items between lists.</div>
+				<div class="slds-dueling-list__column">
+					<span class="slds-form-element__label" id="label-27">Available</span>
+					<div class="slds-dueling-list__options">
+						<div>
+							<select multiple value.bind="selectedValues" ref="sel" style="width: 10em;">
+								<option value="opt1">Atlas - Security</option>
+								<option value="opt2">BI Connector</option>
+								<option value="opt3">Compass</option>
+								<option value="opt4">Configuration</option>
+							</select>
+						</div>
+						<ul aria-describedby="option-drag-label" aria-labelledby="label-27" aria-multiselectable="true" class="slds-listbox slds-listbox_vertical" role="listbox">
+							<li role="presentation" class="slds-listbox__item">
+								<div class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline" draggable="true" role="option" tabindex="-1" aria-selected="true">
+									<span class="slds-media__body">
+										<span class="slds-truncate" title="Arabic">Atlas - Security</span>
+									</span>
+								</div>
+							</li>
+							<li role="presentation" class="slds-listbox__item">
+								<div class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline" draggable="true" role="option" tabindex="-1" aria-selected="false">
+									<span class="slds-media__body">
+										<span class="slds-truncate" title="Dutch">BI Connector</span>
+									</span>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="slds-dueling-list__column">
+					<button class="slds-button slds-button_icon slds-button_icon-container" title="Move Selection to Selected Languages">
+						<svg class="slds-button__icon" aria-hidden="true">
+							<use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#right"></use>
+						</svg>
+						<span class="slds-assistive-text">Move Selection to Selected Components</span>
+					</button>
+					<button class="slds-button slds-button_icon slds-button_icon-container" title="Move Selection to Available Languages">
+						<svg class="slds-button__icon" aria-hidden="true">
+							<use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#left"></use>
+						</svg>
+						<span class="slds-assistive-text">Move Selection to Available Components</span>
+					</button>
+				</div>
+				<div class="slds-dueling-list__column">
+					<span class="slds-form-element__label" id="label-28">Chosen</span>
+					<div class="slds-dueling-list__options">
+						<ul aria-describedby="option-drag-label" aria-labelledby="label-28" aria-multiselectable="true" class="slds-listbox slds-listbox_vertical" role="listbox">
+							<li role="presentation" class="slds-listbox__item">
+								<div class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline" draggable="true" role="option" tabindex="0">
+									<span class="slds-media__body">
+										<span class="slds-truncate" title="Chinese">Compass</span>
+									</span>
+								</div>
+							</li>
+							<li role="presentation" class="slds-listbox__item">
+								<div class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_inline" draggable="true" role="option" tabindex="-1">
+									<span class="slds-media__body">
+										<span class="slds-truncate" title="English">Configuration</span>
+									</span>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

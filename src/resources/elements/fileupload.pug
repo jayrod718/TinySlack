@@ -1,0 +1,23 @@
+template
+  form.uplodr
+    .containr
+      i.fa.fa-upload.fa-2x
+      p.field Drag Files Here
+      p.field.hr-word or
+      span.button.is-primary.is-medium Browse
+    // not sure what files we should accept; can be changed below
+    input.inpt#image_uploads(type='file', name='image_uploads', accept='.jpg, .jpeg, .png', multiple='')
+  ul.uplodr-list
+    // li would be dynamic based on the file(s) uploaded.
+    li.uplodr-list-item
+      a.fa.fa-times.is-info.remove(href="#")
+      | {name of file}
+      span.status Complete
+    li.uplodr-list-item
+      a.fa.fa-times.is-info.remove(href="#")
+      | {name of file}
+      span.status Complete
+    li.uplodr-list-item.has-error
+      a.fa.fa-times.is-info.remove(href="#")
+      | {name of file}
+      span.status File too large

@@ -1,0 +1,7 @@
+template
+  label.label.text(if.bind='label', class="${required ? 'required' : ''} ${required && !isValid ? 'has-text-danger' : ''} ${isOverrideInvalid ? 'has-text-danger': ''}") ${label}
+    span.sub-label(if.bind='instructions') ${instructions}
+  .control.text(ref='_formGroup')
+    span(placeholder.bind='placeholder', disabled.bind='disabled', change.delegate='_changed($event)', input.bind='input($event)', class="${required && !isValid ? 'is-danger' : ''} ${isOverrideInvalid ? 'is-danger': ''} ${inline ? 'inline' : ''}") ${item}
+    p.help.is-danger(if.bind='required && !isValid && showError') ${errorMsg}
+    p.help.is-warning(if.bind='isWarning') ${warningMsg}

@@ -1,0 +1,9 @@
+template
+	label.label(if.bind="label", class="${required && !isValid ? 'has-text-danger' : ''} ${isOverrideInvalid ? 'has-text-danger': ''}") ${label}
+		span.sub-label(if.bind="instructions") ${instructions}
+	.controls.has-radio-group(ref='_formGroup')
+		.control(repeat.for="i of items")
+			input(id.bind='_id+$index', type='radio', disabled.bind='disabled' checked.bind='_item' model.bind='i' change.delegate='_changed($event, $index)', name.bind='_id')
+			label(for.bind='_id+$index') ${ _areObjects ? i[displayAttribute] : i}
+	p.help.is-danger(if.bind='required && !isValid') ${errorMsg}
+	p.help.is-warning(if.bind='isWarning') ${warningMsg}

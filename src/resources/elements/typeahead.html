@@ -1,0 +1,94 @@
+<template>
+	<!-- if typeahead is filled out-->
+	<div class="slds-form-element slds-p-vertical_xx-small ${required && !isValid ? 'slds-has-error' : ''} ${isOverrideInvalid ? 'slds-has-error': ''}" if.bind="_isSelected">
+		<label class="slds-form-element__label" if.bind="label" ref="_formGroup">
+			<abbr if.bind="required" class="${required ? 'slds-required' : ''}" title="required">*</abbr>${!hasOtherSelected ? label : hasOtherLabel}
+			<span class="slds-form-element__label" if.bind="instructions">${instructions}</span>
+		</label>
+		<!-- <div class="slds-form-element__control">
+			<span class="slds-input disabled ${required && !isValid ? 'is-danger' : ''} ${isOverrideInvalid ? 'is-danger': ''}" innerhtml.bind="_selection ? _selection : hasOtherValue"></span>
+			<span class="icon is-small is-right" click.delegate="clearSelection()">
+				<i class="fa fa-times-circle"></i>
+			</span>
+		</div> -->
+		<div class="slds-form-element__control slds-input-has-icon ${selectedrecordicon ? 'slds-input-has-icon_left-right' : 'slds-input-has-icon_right'}">
+			<div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_left-right">
+				<span if.bind="selectedrecordicon" class="slds-icon_container slds-icon-standard-${selectedrecordicon} slds-combobox__input-entity-icon" title="${selectedrecordicon}">
+					<svg class="slds-icon slds-icon_small" aria-hidden="true">
+						<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/resource/lightningdesign/icons/standard-sprite/svg/symbols.svg#${selectedrecordicon}" />
+					</svg>
+					<span class="slds-assistive-text">${selectedrecordicon}</span>
+				</span>
+				<span class="slds-input disabled ${required && !isValid ? 'is-danger' : ''} ${isOverrideInvalid ? 'is-danger': ''}" innerhtml.bind="_selection ? _selection : hasOtherValue">
+				</span>
+				<button class="slds-button slds-button_icon slds-input__icon slds-input__icon_right" title="Remove selected option" click.delegate="clearSelection()">
+					<svg class="slds-button__icon" aria-hidden="true">
+					<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/resource/lightningdesign/icons/utility-sprite/svg/symbols.svg#close"/>
+					</svg>
+					<span class="slds-assistive-text">Remove selected option</span>
+				</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- if typeahead isn't filled out-->
+	<div class="slds-form-element slds-p-vertical_xx-small ${required && !isValid ? 'slds-has-error' : ''} ${isOverrideInvalid ? 'slds-has-error': ''}" if.bind="!_isSelected">
+		<label class="slds-form-element__label" if.bind="label" ref="_formGroup">
+			<abbr if.bind="required" class="${required ? 'slds-required' : ''}" title="required">*</abbr>${!hasOtherSelected ? label : hasOtherLabel}
+			<span class="slds-form-element__label" if.bind="instructions">${instructions}</span>
+		</label>
+		<div class="slds-form-element__control">
+			<div class="slds-combobox_container slds-has-inline-listbox">
+				<div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click ${isOpen ? 'slds-is-open' : 'slds-combobox-lookup'}" aria-expanded="false" aria-haspopup="listbox" role="combobox">
+					<div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right">
+						<svg class="slds-icon slds-input__icon slds-input__icon_right slds-icon-text-default" aria-hidden="true">
+							<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/resource/lightningdesign/icons/utility-sprite/svg/symbols.svg#search" />
+						</svg>
+						<input class="slds-input slds-combobox__input" aria-activedescendant="listbox-option-unique-id-01" ref="_input" type="text" aria-describedby="error-message" aria-autocomplete="list" aria-controls="listbox-unique-id" autocomplete="off" disabled.bind="disabled" placeholder.bind="placeholder" input.delegate="_queryChanged($event) & throttle:200 & debounce:600" focus.trigger="_focusFunc($event)" blur.trigger="_blurFunc($event)" value.bind="query">
+					</div>
+					<div id="listbox-unique-id" role="listbox" class="slds-dropdown slds-dropdown_length-with-icon-7 slds-dropdown_fluid" show.bind="isOpen">
+						<ul class="slds-listbox slds-listbox_vertical  slds-dropdown_fluid" role="presentation">
+							<!-- <li show.bind="results && query" role="presentation" class="slds-listbox__item">
+								<div aria-selected="true" id="option0" class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_term slds-has-focus" role="option">
+									<span class="slds-media__figure">
+										<span class="slds-icon_container slds-icon-utility-search" title="Search for term: ">
+											<svg class="slds-icon slds-icon_x-small slds-icon-text-default" aria-hidden="true">
+												<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/resource/lightningdesign/icons/utility-sprite/svg/symbols.svg#search" />
+											</svg>
+											<span class="slds-assistive-text">Search for term: </span>
+										</span>
+									</span>
+									<span class="slds-media__body">
+										<span class="slds-listbox__option-text slds-listbox__option-text_entity">${query}</span>
+									</span>
+								</div>
+							</li> -->
+							<li show.bind="query" role="presentation" class="slds-listbox__item" style="margin-left:0rem !important;">
+								<div aria-selected="true" id="option0" class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_term" role="option">
+									<span class="slds-media__figure slds-listbox__option-icon">
+										<span class="slds-icon_container slds-icon-utility-search" title="Search for term: ">
+											<svg class="slds-icon slds-icon_x-small slds-icon-text-default" aria-hidden="true">
+												<use xlink:href="/resource/lightningdesign/icons/utility-sprite/svg/symbols.svg#search"></use>
+											</svg><span class="slds-assistive-text">Search for term: </span>
+										</span>
+									</span>
+									<span class="slds-media__body">
+										<span class="slds-listbox__option-text slds-listbox__option-text_entity">${query}</span>
+									</span>
+								</div>
+							</li>
+							<li role="presentation" class="slds-listbox__item" repeat.for="res of results" innerhtml.bind="res.html" mousedown.delegate="selectingFunc($event, res)" style="margin-left:0rem !important;">
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!-- <p class="help is-danger" if.bind="required && !isValid">${errorMsg}</p> -->
+			<div id="error-message" class="slds-form-element__help" if.bind="required && !isValid">${errorMsg}</div>
+			<div class="slds-form-element__help" if.bind="showInlineHelp">
+				<span if.bind="!showInlineHelpLink">${inlineHelpMsg}</span>
+				<a if.bind="showInlineHelpLink" href.bind="inlineHelpLink" class="slds-text-link_reset" target="_blank">${inlineHelpMsg}<span class="slds-text-link">${inlineHelpLinkText}</span>${inlineHelpMsgAfterLink}</a>
+			</div>
+		</div>
+	</div>
+</template>

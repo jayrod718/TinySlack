@@ -1,0 +1,22 @@
+<template>
+    <div class="slds-form-element slds-p-vertical_xx-small ${required && !isValid ? 'slds-has-error' : ''} ${isOverrideInvalid ? 'slds-has-error': ''}">
+        <label class="slds-form-element__label ${required ? 'required' : ''}" if.bind="label" for="text-input-id-1">
+            <abbr if.bind="required" class="${required ? 'slds-required' : ''}" title="required">*</abbr>${label}
+            <span class="sub-label" if.bind="instructions">${instructions}</span>
+        </label>
+        <div class="slds-form-element__control" ref="_formGroup">
+            <!-- if it's just text-->
+            <input aria-describedby="error-message" id="text-input-id-1" class="slds-input ${required && !isValid ? 'is-danger' : ''} ${isOverrideInvalid ? 'is-danger': ''}" placeholder.bind="placeholder" disabled.bind="disabled" if.bind="!isLong && !isNumber" change.delegate="_changed($event)" input.bind="input($event)" value.bind="item"/>
+            <!-- if it's a number-->
+            <input aria-describedby="error-message" id="text-input-id-1" class="slds-input ${required && !isValid ? 'is-danger' : ''} ${isOverrideInvalid ? 'is-danger': ''}" placeholder.bind="placeholder" disabled.bind="disabled" if.bind="!isLong && isNumber" type="number" change.delegate="_changed($event)" input.bind="input($event)" value.bind="item"/>
+            <!-- if it's a textarea-->
+            <textarea aria-describedby="error-message" id="text-input-id-1" class="slds-textarea ${required && !isValid ? 'is-danger' : ''} ${isOverrideInvalid ? 'is-danger': ''}" placeholder.bind="placeholder" disabled.bind="disabled" if.bind="isLong" change.delegate="_changed($event)" input.bind="input($event)" value.bind="item" maxlength="32000" rows="6"></textarea>
+            <div class="slds-form-element__help" if.bind="showInlineHelp">
+                <span if.bind="!showInlineHelpLink">${inlineHelpMsg}</span>
+                <a if.bind="showInlineHelpLink" href.bind="inlineHelpLink" class="slds-text-link_reset" target="_blank">${inlineHelpMsg}<span class="slds-text-link">${inlineHelpLinkText}</span>${inlineHelpMsgAfterLink}</a>
+            </div>
+            <div id="error-message" class="slds-form-element__help" if.bind="required && !isValid && showError">${errorMsg}</div>
+            <div id="error-message" class="slds-form-element__help" if.bind="isWarning">${warningMsg}</div>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,36 @@
+<template>
+	<div class="slds-form-element">
+		<label class="slds-form-element__label ${required ? 'required' : ''}" if.bind="label" for="text-input-id-1">
+			<abbr if.bind="required" class="${required ? 'slds-required' : ''}" title="required">*</abbr>${label}
+			<span class="sub-label" if.bind="instructions">${instructions}</span>
+		</label>
+		<div class="slds-form-element__control">
+			<div class="slds-dueling-list">
+				<div class="slds-assistive-text" id="drag-live-region"></div>
+				<div class="slds-assistive-text" id="option-drag-label">Press space bar when on an item, to move it within the list. CMD plus left and right arrow keys, to move items between lists.</div>
+				<div class="slds-dueling-list__column">
+					<span class="slds-form-element__label" id="label-27">Available</span>
+					<div>
+						<select multiple value.bind="selectedItems" ref="sel" class="slds-dueling-list__options slds-picklist__options">
+							<option value.bind="i.value" repeat.for="i of items">${i.label}</option>
+						</select>
+					</div>
+				</div>
+				<div class="slds-dueling-list__column">
+					<button disabled="disabled" class="slds-button slds-button_icon slds-button_icon-container" title="">
+					</button>
+				</div>
+				<div class="slds-dueling-list__column">
+					<span class="slds-form-element__label" id="label-28">Chosen</span>
+					<div>
+						<select disabled="disabled" multiple ref="selectedlist" class="slds-dueling-list__options slds-picklist__options">
+							<option value.bind="i" repeat.for="i of selectedItems">${i}</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div id="error-message" class="slds-form-element__help" if.bind="required && !isValid">${errorMsg}</div>
+			<div id="error-message" class="slds-form-element__help" if.bind="isWarning">${warningMsg}</div>
+		</div>
+	</div>
+</template>

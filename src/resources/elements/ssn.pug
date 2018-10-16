@@ -1,0 +1,13 @@
+template
+  label.label(if.bind='label', class="${required ? 'required' : ''} ${required && !isValid ? 'has-text-danger' : ''} ${isOverrideInvalid ? 'has-text-danger': ''}") ${label}
+    span.sub-label(if.bind='instructions') ${instructions}
+  .control(ref='_formGroup')
+    // if it's just text
+    input.input(ref="_input", maxlength.bind="maxlength", keyup.trigger="keyupFunc($event)", blur.trigger="onblurFunc($event)", placeholder.bind='placeholder', disabled.bind='disabled', if.bind='!isLong && !isNumber', change.delegate='_changed($event)', input.bind='input($event)', value.bind='item', class="${required && !isValid ? 'is-danger' : ''} ${isOverrideInvalid ? 'is-danger': ''}")
+    // if it's a number
+    input.input(ref="_input", maxlength.bind="maxlength", keyup.trigger="keyupFunc($event)", blur.trigger="onblurFunc($event)", placeholder.bind='placeholder', disabled.bind='disabled', if.bind='!isLong && isNumber', type='number', change.delegate='_changed($event)', input.bind='input($event)', value.bind='item', class="${required && !isValid ? 'is-danger' : ''} ${isOverrideInvalid ? 'is-danger': ''}")
+    // if it's a textarea
+    textarea.textarea(placeholder.bind='placeholder', disabled.bind='disabled', if.bind='isLong', change.delegate='_changed($event)', input.bind='input($event)', value.bind='item', class="${required && !isValid ? 'is-danger' : ''} ${isOverrideInvalid ? 'is-danger': ''}")
+    p.help.is-danger(if.bind='required && !isValid && showError') ${errorMsg}
+    p.help.is-danger(if.bind='!required && !isValid && showError') ${invalidMsg}
+    p.help.is-warning(if.bind='isWarning') ${warningMsg}

@@ -1,0 +1,27 @@
+<template>
+    <div class="slds-form-element slds-p-vertical_xx-small ${required && !isValid ? 'slds-has-error' : ''} ${isOverrideInvalid ? 'slds-has-error': ''}">
+        <label class="slds-form-element__label ${required && !isValid ? 'has-text-danger' : ''} ${isOverrideInvalid ? 'has-text-danger': ''}" if.bind="label">
+            <abbr if.bind="required" class="slds-required" title="required">*</abbr> ${label}</label>
+        <div class="slds-form-element__control" ref="_formGroup">
+            <div class="slds-select_container ${required && !isValid ? 'is-danger' : ''} ${isOverrideInvalid ? 'is-danger': ''}">
+                <select aria-describedby="error-02" class="slds-select" value.bind="_item" change.delegate="_changed($event, $index)" disabled.bind="disabled">
+                    <option>Please select</option>
+                    <option repeat.for="i of items" selected.bind="_activeMap[$index]" model.bind="i" innerhtml.bind="_areObjects ? i[displayAttribute] : i"></option>
+                </select>
+            </div>
+            <div class="slds-form-element__help" id="error-02" if.bind="required && !isValid">${errorMsg}</div>
+            <div class="slds-form-element__help" id="error-03" if.bind="isWarning">${warningMsg}</div>
+        
+            <div if.bind="infoMsg" class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_info" role="alert">
+                <span class="slds-assistive-text">info</span>
+                <span class="slds-icon_container slds-icon-utility-info_alt slds-m-right_x-small">
+                    <svg class="slds-icon slds-icon_x-small" aria-hidden="true">
+                    <use xlink:href="/resource/lightningdesign/icons/utility-sprite/svg/symbols.svg#info_alt"></use>
+                    </svg>
+                </span>
+                <h2>${infoMsg}
+                </h2>
+            </div>
+        </div>
+    </div>
+</template>

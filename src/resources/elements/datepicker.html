@@ -1,0 +1,28 @@
+<template>
+	<div class="slds-form-element slds-p-vertical_xx-small ${required && !isValid ? 'slds-has-error' : ''} ${isOverrideInvalid ? 'slds-has-error': ''}">
+		<label class="slds-form-element__label ${required ? 'required' : ''}" if.bind="label" for="text-input-id-1">
+			<abbr if.bind="required" class="${required ? 'slds-required' : ''}" title="required">*</abbr>${label}
+			<span class="sub-label" if.bind="instructions">${instructions}</span>
+		</label>
+		<div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right" ref="_formGroup">
+			<input class="slds-input ${required && !isValid ? 'is-danger' : ''} ${isOverrideInvalid ? 'is-danger': ''}" ref="_input" disabled.bind="disabled" change.delegate="_changed($event)" blur.trigger="_blurFunc($event)" focus.trigger="show()" placeholder.bind="placeholder" value.bind="_datevalue"/>
+			<button class="slds-button slds-button_icon slds-input__icon slds-input__icon_right" title="Select a date" click.delegate="show()">
+				<svg class="slds-button__icon" aria-hidden="true">
+					<use xlink:href="/resource/lightningdesign/icons/utility-sprite/svg/symbols.svg#event">
+					</use>
+				</svg>
+				<span class="slds-assistive-text">Select a date</span>
+			</button>
+			<p class="help is-danger" if.bind="required && !isValid">${errorMsg}</p>
+			<p class="help is-warning" if.bind="isWarning">${warningMsg}</p>
+		</div>
+		<div show.bind="_isOpen" id="dtpickerdialog" class="slds-datepicker slds-dropdown" role="dialog">
+		</div>
+		<div class="slds-form-element__control" show.bind="showInlineHelp && !_isOpen">			
+			<div class="slds-form-element__help">
+				<span if.bind="!showInlineHelpLink">${inlineHelpMsg}</span>
+				<a if.bind="showInlineHelpLink" href.bind="inlineHelpLink" class="slds-text-link_reset" target="_blank">${inlineHelpMsg}<span class="slds-text-link">${inlineHelpLinkText}</span>${inlineHelpMsgAfterLink}</a>
+			</div>
+		</div>
+	</div>
+</template>

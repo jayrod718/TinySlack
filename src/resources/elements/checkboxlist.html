@@ -1,0 +1,26 @@
+<template>
+	<!-- label with warning-->
+	<label class="label" if.bind="label">${label}
+		<span class="sub-label" if.bind="instructions">${instructions}</span>
+	</label>
+	<p class="help is-danger" if.bind="required && !isValid">${errorMsg}</p>
+	<p class="help is-warning" if.bind="isWarning">${warningMsg}</p>
+	<!-- if value attrbute doesn't exist-->
+	<div class="control" ref="_formGroup" if.bind="_areObjects && !valueAttribute" repeat.for="i of items">
+		<label class="checkbox">
+			<input class="${required && !isValid ? 'has-text-danger' : ''} ${isOverrideInvalid ? 'has-text-danger': ''}" type="checkbox" disabled.bind="disabled" checked.bind="selectedItems" model.bind="i" change.delegate="_changed($event, $index)"/> ${i[displayAttribute]}
+		</label>
+	</div>
+	<!--if value attribute exists-->
+	<div class="control" ref="_formGroup" if.bind="_areObjects && valueAttribute" repeat.for="i of items">
+		<label class="checkbox">
+			<input class="${required && !isValid ? 'has-text-danger' : ''} ${isOverrideInvalid ? 'has-text-danger': ''}" type="checkbox" disabled.bind="disabled" checked.bind="selectedItems" value.bind="i[valueAttribute]" change.delegate="_changed($event, $index)"/> ${i[displayAttribute]}
+		</label>
+	</div>
+	<!--if it's a list of strings-->
+	<div class="control" ref="_formGroup" if.bind="!_areObjects" repeat.for="i of items">
+		<label class="checkbox">
+			<input class="${required && !isValid ? 'has-text-danger' : ''} ${isOverrideInvalid ? 'has-text-danger': ''}" type="checkbox" disabled.bind="disabled" checked.bind="selectedItems" model.bind="i" change.delegate="_changed($event, $index)"/> ${i}
+		</label>
+	</div>
+</template>
