@@ -8,6 +8,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@salesforce-ux/design-system": "^2.7.4",
     "@types/bluebird": "^3.5.20",
     "aurelia-animator-css": "^1.0.4",
     "aurelia-bootstrapper": "^2.2.0",

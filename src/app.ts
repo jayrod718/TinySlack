@@ -48,7 +48,7 @@ export class App {
         console.log('Loading Mock Data');
         this.isLoading = true;      
         // LOAD MOCK DATA
-      
+        
         // This will make the loading icon go away and unblock the UI
         this.isLoaded = true;
         this.isLoading = false;
